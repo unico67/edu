@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		.wrapper {
+			margin: 0 auto;
+			text-align: center;
+		}
+		img {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+			box-shadow: 15px 15px 5px #333;
+			margin: 0 14px;		
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapper">	
+		<figure>
+			<img src="https://velog.velcdn.com/images/ewoo97/post/af819989-f010-41b0-bfa0-e11e547143b1/image.jpg" id="d1" />
+			<img src="https://velog.velcdn.com/images/king_kang/post/76f20374-504f-4971-8684-b1e41860d0e5/image.jpg" id="d2" />
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9CbAOhfuniuXwOWIckyK8drLt7eNvFZyEHg&s" id="d3" />
+			<img src="https://tech.payhere.in/_astro/java_mascot.XHyO13RL_ob7oy.webp" id="d4" />
+			<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Duke_%28Java_mascot%29_waving.svg" id="d5" />
+			<br /><br />
+			<img src="https://cr.openjdk.java.net/~jeff/Duke/png/DukeCheers.png" id="d6" />
+			<img  src="https://cr.openjdk.java.net/~jeff/Duke/png/DuchessCheers.png" id="d7" />
+			<img src="https://cr.openjdk.java.net/~jeff/Duke/png/Duchess.png" id="d8" />
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF4kgJ7WdNhdYe2yBdvh-6JKQWn8hmR9aUuw&s" id="d9" />
+			<img src="https://www.vhv.rs/dpng/d/566-5663375_java-duke-png-download-duke-java-transparent-png.png" id="d10" /> 
+		</figure>	
+	</div>
+	
+	<script>
+		const imgList = document.querySelectorAll("img");
+		imgList.forEach( elem => elem.addEventListener("click",  e => alert(`${e.target.id} 번 듀크립니당`)))		
+	</script>
+</body>
+</html>

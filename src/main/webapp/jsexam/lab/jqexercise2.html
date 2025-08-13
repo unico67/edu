@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>이벤트 처리 실습</h1>
+	<hr>
+	<div id='btn'>
+		<button id="sun">맑음</button>
+		<button id="cloud">흐림</button>
+		<button id="rain">비</button>
+	</div>
+	<hr>
+	<div id='content'></div>
+	<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function(){
+			$('#btn').on('click', function(e){
+				if(e.target.nodeName !== "BUTTON")
+					return;
+				$('#content').text('');
+				$('<img/>').attr({
+					width : 300,
+					height : 300,
+					src : `../../images/${e.target.getAttribute("id")}.png`
+				}).appendTo('#content');
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>map</title>
+<style>
+	@font-face {
+    	font-family: 'TheJamsil5Bold';
+    	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    	font-weight: 700;
+    	font-style: normal;
+	}
+	* {
+		font-family: 'TheJamsil5Bold';
+	}
+	body {
+		text-align : center;
+	}
+	div#map {
+		width : 700px;
+		height : 500px;
+		margin : 10px auto;
+		border-radius : 10px;		
+	}
+
+</style>
+</head>
+<body>
+	<h1>지도를 그리자</h1>
+	<hr>
+	<button>우리집</button>
+	<button>내가 좋아하는 곳</button>
+	<hr>
+	<div id="map" ></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
+	<script>
+		function hmapDraw() {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(37.583743027324,
+						126.999963317958), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+			var imageSrc = '/edu/images/kosa1.jpg', // 마커이미지의 주소입니다    
+			imageSize = new kakao.maps.Size(40, 50), // 마커이미지의 크기입니다
+			imageOption = {
+				offset : new kakao.maps.Point(20, 60)
+			}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+			//마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
+					imageOption)
+
+			// 마커를 표시할 위치입니다 
+			var position = new kakao.maps.LatLng(37.583743027324,
+					126.999963317958);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				position : position,
+				image : markerImage,
+				clickable : true
+			});
+
+			// 마커를 지도에 표시합니다.
+			marker.setMap(map);
+
+			// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+			var iwContent = '<div style="padding:10px;background-color:lime;font-weight:bold;">여기가 우리집~~!!</div>',
+			iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({
+				content : iwContent,
+				removable : iwRemoveable
+			});
+
+			// 마커에 클릭이벤트를 등록합니다
+			kakao.maps.event.addListener(marker, 'click', function() {
+				// 마커 위에 인포윈도우를 표시합니다
+				infowindow.open(map, marker);
+			});
+		}
+		function fmapDraw() {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(37.5556236021213, 126.992199507869), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+			var imageSrc = '/edu/images/icon2.png', // 마커이미지의 주소입니다    
+			imageSize = new kakao.maps.Size(40, 50), // 마커이미지의 크기입니다
+			imageOption = {
+				offset : new kakao.maps.Point(20, 60)
+			}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+			//마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
+					imageOption)
+
+			// 마커를 표시할 위치입니다 
+			var position = new kakao.maps.LatLng(37.5556236021213, 126.992199507869);
+
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				position : position,
+				image : markerImage,
+				clickable : true
+			});
+
+			// 마커를 지도에 표시합니다.
+			marker.setMap(map);
+
+			// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+			var iwContent = '<div style="padding:10px;background-color:magenta;font-weight:bold;">내가 좋아하는 곳...남산~</div>', 
+			iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+			// 인포윈도우를 생성합니다
+			var infowindow = new kakao.maps.InfoWindow({
+				content : iwContent,
+				removable : iwRemoveable
+			});
+
+			// 마커에 클릭이벤트를 등록합니다
+			kakao.maps.event.addListener(marker, 'click', function() {
+				// 마커 위에 인포윈도우를 표시합니다
+				infowindow.open(map, marker);
+			});
+		}
+		document.querySelectorAll("button").forEach(
+				function (e) { 
+					e.addEventListener("click", function (event) {
+						if (event.target.textContent == "우리집"){
+							hmapDraw();		
+						} else {
+							fmapDraw()
+						}						
+					})   
+				}
+		);
+	</script>
+</body>
+</html>

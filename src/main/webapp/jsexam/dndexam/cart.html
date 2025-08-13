@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	img{
+		width : 150px;
+		height : 150px;
+		margin : 15px;
+		border : 2px solid black;
+		box-shadow : 10px 10px 10px gray;
+	}
+	figure{
+		width : 1000px;
+		margin-right : auto;
+		margin-left : auto;
+	}
+	h1{
+		text-align : center;
+		font-family: 'ONE-Mobile-POP';
+	}
+	@font-face {
+	    	font-family: 'ONE-Mobile-POP';
+	    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+	    	font-weight: normal;
+	    	font-style: normal;
+	}
+	div{
+		width : 500px;
+		height : 300px;
+		margin-right : auto;
+		margin-left : auto;
+		border : 3px dotted red;
+		padding : 20px;
+	}
+</style>
+</head>
+<body>
+	<h1>원하는 상품을 드래그하여 장바구니에 넣으세요~~</h1>
+	<hr>
+	<figure id="picturesbox">
+		<img id='1' src="../../images/1.jpg">
+		<img id='2' src="../../images/2.jpg">
+		<img id='3' src="../../images/3.jpg">
+		<img id='4' src="../../images/4.jpg">
+		<img id='5' src="../../images/5.jpg">
+		<br>
+		<img id='6' src="../../images/6.jpg">
+		<img id='7' src="../../images/7.jpg">
+		<img id='8' src="../../images/8.jpg">
+		<img id='9' src="../../images/9.jpg">
+		<img id='10' src="../../images/10.jpg">
+	</figure>
+	<hr>
+	<div id="dropbox">
+		
+	</div>
+	<script>
+		let drop;
+		let cart = new Array(10);
+		for(let i = 0; i < cart.length; i++){
+			cart[i] = localStorage.getItem(i + 1) === null ? 0 : parseInt(localStorage.getItem(i + 1));
+		}
+		console.log(cart);
+		function initiate(){
+			const images = document.querySelectorAll("img");
+			for(const img of images)
+				img.addEventListener("dragstart", dragged);
+			
+			drop = document.querySelector("#dropbox");
+			drop.addEventListener("dragover", function(e){e.preventDefault();});
+			drop.addEventListener('drop', dropped);
+			print();
+		}
+		function dragged(e){
+			elem=e.target;
+			e.dataTransfer.setData('Text', elem.getAttribute('id'));
+		}
+		function dropped(e){
+			e.preventDefault();
+			let id=e.dataTransfer.getData('Text');
+			localStorage.setItem(id, cart[id - 1] + 1);
+			cart[id - 1]++;
+			console.log(cart);
+			print();
+		}
+		function print(){
+			let content = "";
+			for(let i = 0; i < cart.length; i++){
+				if(localStorage.getItem(i + 1) === null)
+					continue;
+				else
+					content += `<li>${i + 1}번 상품 ${localStorage.getItem(i + 1)}개</li>`;
+			}
+			drop.innerHTML = content;
+		}
+		window.addEventListener('load', initiate);
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>이벤트 모델-인라인</h1>
+	<hr>
+	<button onclick="changeColor(1);">빨강색</button>
+	<button onclick="changeColor(2);">파랑색</button>
+	<button onclick="changeColor(3);">노랑색</button><br>
+	<hr>
+	<h3></h3>
+	<script>
+	    const h3 = document.getElementsByTagName("h3")[0];
+	    const text = `오늘은 XX월 XX일입니다`
+	    h3.textContent = text;
+	
+		function changeColor(num) {
+			if (num == 1)
+				h3.style.color = "red";
+			else if (num == 2)
+				h3.style.color = "blue"; 
+			else
+				h3.style.color = "yellow";  		
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script src="../util.js"></script>
+	<script>
+		function DayInfo(name, year, month, day){
+			this.name = name;
+			this.year = year;
+			this.month = month;
+			this.day = day;
+		}
+		DayInfo.prototype.getTotalDates = function(){
+			const day = new Date(this.year, this.month - 1, this.day);
+			writeColor(`${this.name}님은 태어난지 ${parseInt((Date.now() - day.getTime()) / (1000 * 3600 * 24))}일 되었어요.`, "h3", "blue");
+		};
+		DayInfo.prototype.getKorDay = function(){
+			const day = new Date(this.year, this.month - 1, this.day);
+			const week = ["일", "월", "화", "수", "목", "금", "토"];
+			writeColor(`${this.name}님은 ${week[day.getDay()]}요일에 태어났어요.`, "h3", "red");
+		};
+		const p1 = new DayInfo("둘리", 2025, 7, 2);
+		const p2 = new DayInfo("또치", 2025, 6, 4);
+		const p3 = new DayInfo("도우너", 1999, 1, 1);
+		const p4 = new DayInfo("듀크", 1996, 1, 4);
+		const p5 = new DayInfo("턱시", 1991, 8, 25);
+		p1.getTotalDates();
+		p1.getKorDay();
+		p2.getTotalDates();
+		p2.getKorDay();
+		p3.getTotalDates();
+		p3.getKorDay();
+		p4.getTotalDates();
+		p4.getKorDay();
+		p5.getTotalDates();
+		p5.getKorDay();
+	</script>
+</body>
+</html>

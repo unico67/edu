@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	text-align: center;
+}
+
+h1 {
+	font-family: 'SDSamliphopangche_Outline';
+	text-shadow: 0px 0px 10px yellow;
+}
+
+table, th, tr, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th {
+	background-color: pink;
+	text-align: center;
+}
+</style>
+<body>
+	<H1>구별 도서관 정보를 알려줘요~~</H1>
+	<hr>
+	<div class='btns'>
+		<button data-value='동대문구'>동대문구</button>
+		<button data-value='동작구'>동작구</button>
+		<button data-value='강남구'>강남구</button>
+		<button data-value='마포구'>마포구</button>
+		<button data-value='영등포구'>영등포구</button>
+	</div>
+	<Hr>
+	<table id='library'>
+
+	</table>
+	<script>
+		//handler
+		function clickHandler(e) {
+			const btnsDom = document.querySelector(".btns");
+			btnsDom.addEventListener("click", region);
+		}
+		//버튼 이벤트 할당
+		function region(e) {
+			if (e.target.nodeName == 'BUTTON') {
+				//button 마다 설정해놓은 value값 가져오기
+				let locNames = document.querySelectorAll('button');
+				const name = e.target.getAttribute('data-value');
+
+				//api요청
+				let url = "http://openapi.seoul.go.kr:8088/796143536a756e69313134667752417a/json/SeoulPublicLibraryInfo/1/1000/"
+				const xhr = new XMLHttpRequest();
+				xhr.onload = function(e) {
+					if (xhr.status == 200) {
+						//이벤트 시작할때마다 table 초기화
+						let chart = document.getElementById('library');
+						chart.innerHTML = "<tr><th>도서관명</th><th>주소</th></tr>";
+						
+						//json 파싱
+						const jsonObj = JSON.parse(xhr.responseText);
+						const libInfo = jsonObj.SeoulPublicLibraryInfo.row;
+
+						//파싱된 json에서 조건에 맞는값인경우 출력
+						for ( let i in libInfo) {
+							if (libInfo[i].CODE_VALUE == name) {
+								console.log(libInfo[i].LBRRY_NAME);
+								chart.innerHTML += "<tr><td>"
+										+ libInfo[i].LBRRY_NAME + "  </td><td>"
+										+ libInfo[i].ADRES + "</td></tr>";
+							}
+						}
+
+					}
+				}
+				xhr.open('GET', url, true);
+				xhr.send();
+			}
+		}
+
+		window.addEventListener("load", clickHandler);
+	</script>
+
+
+</body>
+</html>

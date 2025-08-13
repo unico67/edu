@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		@font-face {
+		    font-family: 'Ownglyph_corncorn-Rg';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2412-1@1.0/Ownglyph_corncorn-Rg.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		body {
+			font-family: 'Ownglyph_corncorn-Rg';
+			margin: 0 auto;
+			text-align: center; 
+		}
+		h1 {
+			padding-block: 20px; 
+			font-size: 30px;
+			color: white;
+			background-image: linear-gradient(to right, lightblue, steelblue, darkblue);
+		}
+	</style>
+</head>
+<body>
+	<h1 class="title">오늘의 날씨 정보</h1>
+	<hr />   
+	<div class="content"></div>
+	
+	<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+		$(document).ready(() => {
+			$.ajax('/edu/jsexam/ajaxjqexam/content/weather.jsp', {
+				success: (data) => {
+					$('.content').html( 
+						`
+							<h2>기온 : ${data.temp}</h2>
+							<img src='../../${data.img}' alt="사진 없음" />
+						`
+					);
+				}
+			});
+			
+			// 왜 interval이랑 애니메이션이 같은 시간이면 부드럽게 될까요?
+			setInterval(() => {
+				$(".title").animate({
+					opacity: "toggle",
+				}, 2000);
+			}, 2000);
+		});
+	</script>
+</body>
+</html>

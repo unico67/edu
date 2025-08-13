@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+	
+	* {
+		font-family: 'yg-jalnan';
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	h1 {
+		text-align: center;
+		text-shadow: 0 0 5px green;
+	}
+	button {
+		margin: 20px 0;
+		text-align: center;
+	}
+	table, td, th {
+		border-collapse: collapse;
+		border : 1px solid black;
+	}
+	th {
+		background-color: lightpink;
+	}
+	
+</style>
+</head>
+<body>
+	<h1>구별 도서관 정보를 알려줘요~~</h1>
+	<hr>
+	<div>
+	<button id='동대문구'>동대문구</button>
+	<button id='동작구'>동작구</button>
+	<button id='강남구'>강남구</button>
+	<button id='마포구'>마포구</button>
+	<button id='영등포구'>영등포구</button>
+	</div>
+	<hr>
+	<table>
+		<thead>
+			<tr>
+		   		<th>도서관명</th><th>주소</th>
+			</tr>
+		</thead>
+		<tbody id="TableBody"></tbody>
+	</table>
+
+</body>
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+	$('button').click(function() {
+		const guName = $(this).attr('id');
+		$.getJSON('http://openapi.seoul.go.kr:8088/796143536a756e69313134667752417a/json/SeoulPublicLibraryInfo/1/1000/',  function(data) {
+			const libraries = data.SeoulPublicLibraryInfo.row;	
+
+			const filtered = libraries.filter(lib => lib.CODE_VALUE === guName);
+			$('#TableBody').empty();			
+			$.each(filtered, function(i, lib) { 
+					const row = $('<tr>');
+					row.append($("<td>").text(lib.LBRRY_NAME))
+					row.append($("<td>").text(lib.ADRES));
+					$('#TableBody').append(row);
+			  });
+		}); 
+	});
+	</script>
+</body>
+</html>

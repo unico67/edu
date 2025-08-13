@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ECMAScript6</title>
+</head>
+<body>
+	<h1>Set 객체</h1>
+	<hr>
+	<script>
+		let fruitSet = new Set();		
+		console.log(fruitSet);
+		
+		fruitSet = new Set(["Apple", "Melon"]);		
+		console.log(fruitSet);
+		
+ 		fruitSet = new Set();		
+		fruitSet.add("Apple");
+		fruitSet.add("Melon");
+		
+		console.log(fruitSet);
+		console.log(fruitSet.has("Apple"));		
+		console.log(fruitSet.has("Melon"));
+		fruitSet.delete("Apple")		
+		console.log(fruitSet.has("Apple"));
+		console.log(fruitSet);		
+		
+		fruitSet.add("Pineapple");
+		fruitSet.add("Grape");
+		fruitSet.add("Grape");
+		
+		for(var fruit of fruitSet) {
+			console.log(fruit);
+		}
+
+		fruitSet.forEach(function(value) {
+			console.log(value);
+		});
+		
+		fruitSet.forEach(value => 
+			console.log(value)
+		);
+		
+		fruitSet.forEach(value => { 
+			console.log(value);
+		});
+	</script>
+</body>
+</html>

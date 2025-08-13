@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		body {
+			margin: 0 auto;
+			text-align: center;
+		}
+		
+		h1 {
+			margin-top: 0;
+			
+			background-image: linear-gradient(to right, lightblue, lightgreen, orange);
+			padding: 20px 10px;
+			color: darkblue;
+			font-size: 40px;
+			text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+		}
+		div {
+			padding-block: 20px;
+		}
+		
+		button {
+			padding: 5px 20px;
+			background-color: steelblue;
+			color: white;
+			border: 1px solid steelblue;
+			transition: all 0.5s;
+			border-radius: 15px;
+			font-size: 20px;
+			margin-right: 10px;
+			
+			&:hover {
+				color: black;
+				opacity: 0.7;
+			}
+		}
+	</style>
+</head>
+<body>
+	<h1>송승엽의 HTML5 API 실습</h1>
+	<hr />
+	<div>
+		<button onclick="saving()">저장하기</button>
+		<button onclick="clearing()">삭제하기</button>
+		<button onclick="reading()">읽어오기</button>
+	</div>
+	<hr />
+	<canvas id="m" width="500" height="500"></canvas>
+	<script>
+		const m_canvas = document.getElementById('m');
+		const m_ctx = m_canvas.getContext("2d");
+	    m_canvas.addEventListener("mousemove", eyeAnimation);
+	    
+	    function saving() {
+	    		window.localStorage.setItem("mycanvas", m_canvas.toDataURL());
+	    }
+	    
+	    function clearing() {
+	    		m_ctx.clearRect(0,0,500,500);
+	    		 m_canvas.removeEventListener("mousemove", eyeAnimation);
+	    }
+	    
+	    function reading() {
+	    	  const img = new Image();
+	    	  img.src = window.localStorage.mycanvas;
+	    	  img.addEventListener("load",function() {
+	    		  m_ctx.drawImage(img, 0, 0);
+	    		  m_canvas.addEventListener("mousemove", eyeAnimation);
+	    	  })
+	    }
+	    
+	    function drawFace() {
+			// 얼굴
+			m_ctx.beginPath();
+			m_ctx.arc(250, 250, 100, 0, Math.PI * 2, false);
+			m_ctx.fillStyle = "pink"; 
+			m_ctx.fill();
+			
+			// 입
+			m_ctx.beginPath();
+			m_ctx.moveTo(200,275);
+			m_ctx.quadraticCurveTo(250,340, 300,275);
+			m_ctx.stroke();
+			
+			// 왼쪽 눈
+			m_ctx.beginPath();
+			m_ctx.arc(200, 225, 30, 0, Math.PI * 2, false);
+			m_ctx.fillStyle = "white"; 
+			m_ctx.fill();
+			
+			// 왼쪽 눈알
+	/* 		m_ctx.beginPath();
+			m_ctx.arc(200, 225, 10, 0, Math.PI * 2, false);
+			m_ctx.fillStyle="black"; 
+			m_ctx.fill(); */
+			
+			// 오른쪽 눈
+			m_ctx.beginPath();
+			m_ctx.arc(300, 225, 30, 0, Math.PI * 2, false);
+			m_ctx.fillStyle = "white"; 
+			m_ctx.fill();
+			
+			// 오른쪽 눈알
+	/* 		m_ctx.beginPath();
+			m_ctx.arc(300, 225, 10, 0, Math.PI * 2, false);
+			m_ctx.fillStyle = "black"; 
+			m_ctx.fill(); */
+			
+			// 코
+			m_ctx.beginPath();
+		    m_ctx.moveTo(250,250);
+		    m_ctx.lineTo(270,270); 
+		    m_ctx.lineTo(230,270);
+		    m_ctx.fillStyle = "crimson";
+		    m_ctx.fill();
+	    }
+	    
+	    function eyeAnimation(e) {
+	    		let xmouse = e.clientX;
+	    		let ymouse = e.clientY;
+
+	    		const xcenter = 250;
+	    		const ycenter = 225; 
+	    		let ang = Math.atan2(xmouse-xcenter,ymouse-ycenter);
+	    		
+	    		let x = xcenter+Math.round(Math.sin(ang)*10);
+	    		let y = ycenter+Math.round(Math.cos(ang)*10);
+
+	    	    // 화면 지우기
+	    	    //clearing(); <- 승엽시 이 부분이 문제였어요...^^
+	    	    m_ctx.clearRect(0,0,500,500);
+
+	    	    // 얼굴 다시 그리기
+	    	    drawFace();
+	    		
+	    	    let isAbove = ymouse < ycenter;
+	    	    let leftEyeY, rightEyeY;
+
+	    	    if (isAbove) {
+	    	        // center 위쪽 → 왼쪽 눈알 위, 오른쪽 눈알 아래
+	    	        leftEyeY = y - 10;
+	    	        rightEyeY = y + 10;
+	    	    } else {
+	    	        // center 아래쪽 → 왼쪽 눈알 아래, 오른쪽 눈알 위
+	    	        leftEyeY = y + 10;
+	    	        rightEyeY = y - 10;
+	    	    }
+
+	    	    m_ctx.beginPath();
+	    	    m_ctx.fillStyle = "black";
+	    	    m_ctx.arc(x - 60, leftEyeY, 10, 0, Math.PI * 2, false);
+	    	    m_ctx.arc(x + 40, rightEyeY, 10, 0, Math.PI * 2, false);
+	    	    m_ctx.fill();
+	    }
+	</script>
+</body>
+</html>

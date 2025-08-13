@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>객체 복습과 ECMA 에서 추가된 기능</h1>
+<script>
+const obj1 = {}; // 'object literal' syntax
+const obj2 = new Object(); // 'object constructor' syntax
+
+function print(person) {
+  console.log(person.name);
+  console.log(person.age);
+}
+
+const dooly = { name: 'dooly', age: 4 };
+print(dooly);
+
+dooly.hasJob = true;
+console.log(dooly.hasJob);
+
+delete dooly.hasJob;
+console.log(dooly.hasJob);
+
+
+console.log(dooly.name);
+console.log(dooly['name']);
+dooly['hasJob'] = true;
+console.log(dooly.hasJob);
+
+function printValue(obj, key) {
+  console.log(obj[key]);
+}
+printValue(dooly, 'name');
+printValue(dooly, 'age');
+
+console.log("=".repeat(20))
+const person1 = { name: 'bob', age: 2 };
+const person2 = { name: 'steve', age: 3 };
+const person3 = { name: 'dave', age: 4 };
+const person4 = new Person('elile', 30);
+console.log(person4);
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+console.log('name' in dooly);
+console.log('age' in dooly);
+console.log('random' in dooly);
+console.log(dooly.random);
+
+for (let key in dooly) {
+  console.log(key);
+}
+
+const array = [1, 2, 4, 5];
+for (let value of array) {
+  console.log(value);
+}
+console.log("=".repeat(20))
+
+const user = { name: 'dooly', age: '20' };
+const user2 = user;
+console.log(user);
+
+const user3 = {};
+for (let key in user) {
+  user3[key] = user[key];
+}
+console.log(user3);
+
+const user4 = Object.assign({}, user);
+console.log(user4);
+
+console.log("=".repeat(20))
+const fruit1 = { color: 'red' };
+const fruit2 = { color: 'blue', size: 'big' };
+const mixed = Object.assign({}, fruit1, fruit2);
+console.log(mixed.color);
+console.log(mixed.size);
+</script>
+</body>
+</html>

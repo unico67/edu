@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ECMAScript6</title>
+</head>
+<body>
+	<h1>Spread 연산자(전개 구문)-배열, 문자열</h1>
+	<hr>
+	<h3>배열, 객체, 문자열 등을 펼쳐서 다른 배열, 객체, 또는 함수 인수로 전달할 수 있게 해주는 유용한 기능</h3>
+	<ul>
+		<li>myFunction(...iterableObj)</li>
+		<li>[...iterableObj, "4", "five", 6];</li>
+	</ul>	
+	<script>
+		const colorArray = ["red", "green", "blue"];
+		const newColorArray = [...colorArray, "orange"];
+		
+		console.log(colorArray);		
+		console.log(newColorArray);
+		
+		const numArray = [2, 3, 4];
+		const newNumArray = [1, ...numArray, 5];		
+		console.log(numArray);		
+		console.log(newNumArray);
+
+		function myPrint(a, b, c) {
+			console.log(a);
+			console.log(b);
+			console.log(c);
+		}
+		
+		const array1 = [1, 2, 3];
+		myPrint(array1);
+		console.log(array1);		
+		myPrint( ...array1);
+		
+		const stringArray = [..."xyz"];		
+		console.log(stringArray);		
+		myPrint( ...stringArray);
+		
+		let str = "가나다라마";		
+		for(let ch of str) {
+			console.log(ch);
+		}
+		let ary1 = [...str];
+		console.log(ary1);
+		const [c1, c2] = str;		
+		const [c3, c4, ...c5] = str;
+		console.log(c1);
+		console.log(c2);
+		console.log("=".repeat(50));
+		console.log(c3);
+		console.log(c4);
+		console.log(c5);
+		
+		const array2 = [10, 20, 60, 50, 30];		
+		console.log(Math.max( ...array2));
+		console.log(Math.max(array2)); // NaN 이 나오는 이유 도큐먼트 채크해서 확인해 보자
+	</script>
+</body>
+</html>

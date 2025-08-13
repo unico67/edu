@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>File API</title>
+  <link rel="stylesheet" href="file.css">
+  <script>
+  	function initiate(){
+	  databox=document.getElementById('databox');
+	  var myfiles=document.getElementById('myfiles');
+	  myfiles.addEventListener('change', process, false);
+	}
+	function process(e){
+	  var files=e.target.files;
+	  databox.innerHTML='';
+	  var file=files[0];
+	  if(!file.type.match(/image.*/i)){
+	    alert('insert an image');
+	  }else{
+	    databox.innerHTML+='Name: '+file.name+'<br>';
+	    databox.innerHTML+='Size: '+file.size+' bytes<br>';
+	   
+
+	    var reader=new FileReader();	    
+	    reader.addEventListener('load', show, false); //reader.onload=show 와 동일
+	    reader.readAsDataURL(file);
+	  }
+	}
+	function show(e){
+	  var result=e.target.result;
+	  databox.innerHTML+='<img src="'+result+'" width=300>';
+	}
+	window.addEventListener('load', initiate, false);
+  </script>
+</head>
+<body>
+  <section id="formbox">
+    <form name="form">
+      <p>File:<br><input type="file" name="myfiles" id="myfiles"></p>
+    </form>
+  </section>
+  <section id="databox">
+    No File Selected
+  </section>
+</body>
+</html>
+

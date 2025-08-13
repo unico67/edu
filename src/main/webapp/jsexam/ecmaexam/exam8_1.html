@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ECMAScript6</title>
+</head>
+<body>
+	<h1>Spread 연산자(전개 구문)-객체리터럴</h1>
+	<hr>
+	<h3>배열, 객체, 문자열 등을 펼쳐서 다른 배열, 객체, 또는 함수 인수로 전달할 수 있게 해주는 유용한 기능</h3>
+	<ul>
+		<li>let objClone = { ...obj };</li>
+		<li>ECMAScript 2018에서 추가</li>
+	</ul>	
+	<script>
+		var obj1 = { foo: "bar", x: 42 };
+		var obj2 = { foo: "baz", y: 13, z: 20 };
+		
+		var clonedObj = { ...obj1 };
+		console.log(clonedObj);		
+		var mergedObj = { ...obj1, ...obj2 };
+		console.log(mergedObj);	
+	</script>
+</body>
+</html>

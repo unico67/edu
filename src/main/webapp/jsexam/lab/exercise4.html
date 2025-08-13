@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#title{
+		text-shadow : 2px 2px 10px lime;
+		color : rgb(128, 0, 255);
+	}
+	#dan{
+		color : blue;
+	}
+</style>
+</head>
+<body>
+	<h1 id='title'>자바스크립트로 구현하는 구구단</h1>
+	<hr>
+	<script>
+		while(true){
+			const num = window.prompt("1~9 사이의 숫자 한 개를 입력하세요.");
+			if(num >= 1  && num <= 9)			
+				break;
+		}
+		document.write("<h1 id='dan'>" + num + " 단입니다.</h1>");
+		document.write("<hr>");
+		for(let i = 1; i < 10; i++)
+			document.write(num + " x " + i + " = " + (num*i) + "<br>");
+	</script>
+</body>
+</html>

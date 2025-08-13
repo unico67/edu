@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+@font-face {
+	    font-family: 'Ownglyph_ParkDaHyun';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+	div {
+		background-image : linear-gradient(to top, skyblue, white);
+		margin : 20px;
+		width : 350px;
+		height : 250px;
+		font-size : 1.0em;
+		border-radius : 15px;
+		text-align : left;
+		padding : 30px;
+		margin-left : auto;
+        margin-right : auto;
+	}
+	h1 {
+		text-align : center;
+		text-shadow : 2px 2px 5px gray, 2px 2px 5px blue;
+	}
+	* {
+		font-family: 'Ownglyph_ParkDaHyun';
+	}
+</style>
+
+</head>
+<body>
+<h1>펜션 예약 서비스</h1>
+<hr>
+
+<div>
+<form method="post" action="...">
+	예약자명 : <input type="text" name="a"><br>
+	<br>
+	예약암호 : <input type="password" name="b"><br>
+	<br>
+	룸선택 : <input type="radio" name="c">둘리
+	<input type="radio" name="c">희동
+	<input type="radio" name="c">도우너
+	<input type="radio" name="c">또치<br>
+	<br>
+	추가요청사항 : <input type="checkbox" name="d">바베큐
+	<input type="checkbox" name="d">수영장
+	<input type="checkbox" name="d">낚시
+	<input type="checkbox" name="d">조식<br>
+	<br>
+	<label>예약날짜 : <input type="date"  name="e">
+	</label>
+	<hr>
+	<br>
+	<input type="submit" value="보내기">
+	<input type="reset" value="다시작성하기">
+</form>
+</div>
+
+</body>
+</html>

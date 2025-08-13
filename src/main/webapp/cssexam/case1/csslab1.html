@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+
+        div {
+            background-image: linear-gradient(to right, red, orange, lime);
+            width : 40%;            
+            margin-left : auto;
+            margin-right : auto;
+            border-radius: 10px; 
+            padding: 30px;           
+        }
+        span {
+            color : white;
+        }
+        
+
+    </style>
+</head>
+<body>
+	<div>
+		<h1><span>성적</span>을 입력하시오.</h1>
+		<hr>
+		
+		<form method="get" action="..." >
+		
+			<label for=name>이름 : </label>
+			<input id=name name=name type=text required>
+			<br>
+			<br>
+			<label for=score>평균 점수 : </label>
+			<input id=score name=score type=number required>
+			<br>
+			<br>
+			<button type="submit">등록</button>
+			<button type="reset">재작성</button>
+		</form>
+	</div>
+</body>
+</html>

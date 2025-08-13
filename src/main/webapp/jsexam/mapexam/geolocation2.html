@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+</head>
+<body>
+   <p id="demo">위치정보를 추출하려면 실행 버튼을 클릭하세요:</p>
+   <button onclick="getLocation()">실행</button>
+   <div id="map" style="width:800px;height:500px;"></div>
+   <script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
+   <script>
+      var x=document.getElementById("demo");
+	  function getLocation() {
+         if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+         }
+         else{x.innerHTML=" 이 브라우저는 geolocation을 지원하지 않습니다.";}
+      }
+      function showPosition(position) {
+          x.innerHTML="위도: " + position.coords.latitude + "<br />경도: " + position.coords.longitude;  
+          
+          // 받아온 위도와 경도 정보로 <div> 태그 영역에 지도 출력(마커도 표시)
+          
+          var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+  				mapOption = {
+  					center : new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude), // 지도의 중심좌표
+  					level : 3 		// 지도의 확대 레벨
+  				};
+
+  		  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+  		  // 마커가 표시될 위치입니다 
+  		  var markerPosition = new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  		  var imageSize = new kakao.maps.Size(24, 35);  		  
+  		  var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+
+  		  var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+  		  // 마커를 생성합니다
+  		  var marker = new kakao.maps.Marker({
+  			map: map, // 마커를 표시할 지도
+  	        position: markerPosition, // 마커를 표시할 위치
+  	        title : "재미있당", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+  	        image : markerImage // 마커 이미지 
+  		  });            
+      }
+      function showError(error) {
+         switch(error.code) {
+            case error.PERMISSION_DENIED:
+               x.innerHTML="사용자가 위치 기능 사용을 거부했습니다."
+            break;
+ 
+            case error.POSITION_UNAVAILABLE:
+            x.innerHTML="위치를 구할 수 없습니다.";
+            break;
+ 
+            case error.TIMEOUT:
+            x.innerHTML="사용자가 위치 기능 사용을 거부했습니다.";
+            break;
+           
+            case error.UNKNOWN_ERROR:
+             x.innerHTML="기타 에러";
+             break;
+         }
+      }
+</script>
+</body>
+</html>
+
+
+
+

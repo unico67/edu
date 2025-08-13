@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+* {
+	text-align: center;
+}
+
+button {
+	border: 1px solid blue;
+	border-radius: 5px;
+	width: 50px;
+	height: 30px;
+	background-color: white;
+}
+</style>
+<body>
+	<h1>구구단</h1>	
+	<div>
+		<button value="1">1단</button>
+		<button value="2">2단</button>
+		<button value="3">3단</button>
+		<button value="4">4단</button>
+		<button value="5">5단</button>
+		<button value="6">6단</button>
+		<button value="7">7단</button>
+		<button value="8">8단</button>
+		<button value="9">9단</button>
+	</div>
+	<hr>
+	<div></div>
+
+	<script>
+		let wiki = document.getElementsByTagName("h1")[0];
+		wiki.addEventListener("click", function() {
+			location.href = 'https://ko.wikipedia.org/wiki/구구단';
+		})
+
+		window.addEventListener("load", clickHandler);
+
+		function clickHandler() {
+			const divDom = document.getElementsByTagName('div')[0];
+			divDom.addEventListener("click", gugu);
+		}
+		
+		function gugu(e) {
+			if (e.target.nodeName == 'BUTTON') {
+				const print = document.getElementsByTagName('div')[1];
+				const dan = e.target.value;
+				let result = '';
+				for (i = 1; i <= 9; i++) {
+					result += `${dan} x ${i} = ${dan*i}<br>`;
+				}
+				print.innerHTML = result;
+			}
+
+		}
+	</script>
+
+</body>
+</html>

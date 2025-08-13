@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 style="color:blue;">자바스크립트 실습(7)</h1>
+	<hr>
+	<script src="../util.js"></script>
+	<script>
+		function printH1(content){
+			write(content, "h1");
+		}
+		
+		function printH4(content){
+			write(content, "h4");
+		}
+		
+		function apply(arr, func){
+			if(!(Array.isArray(arr)) || typeof func !== "function"){
+				console.log("아규먼트 오류");
+				return false;
+			}
+			for(let e of arr){
+				func(e);
+			}
+			return true;
+		}
+		let arr = [];
+		while(true){
+			const el = prompt("데이터를 입력하세요");
+			if(el == null || el == "")
+				break;
+			arr.push(el);
+		}
+		let rand = Math.floor(Math.random() * 10) + 1;
+		console.log("추출된 난수 + " + rand);
+		let result;
+		switch(rand){
+		case 1:
+		case 4:
+		case 6: result = apply(arr, printH1);
+				break;
+		case 3:
+		case 5:
+		case 7: result = apply(arr, printH4);
+				break;
+		case 8:
+		case 9: result = apply("ㅋㅋ", printH1);
+				break;
+		default: apply(arr);
+		}
+		
+		if(result)
+			alert("처리 성공");
+		else
+			alert("처리 실패");
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+﻿이것은 테스트 파일입니다.
+Web for All - 
+The social value of the Web is that it enables human communication, commerce, and opportunities to share knowledge. One of W3C's primary goals is to make these benefits available to all people, whatever their hardware, software, network infrastructure, native language, culture, geographical location, or physical or mental ability. 

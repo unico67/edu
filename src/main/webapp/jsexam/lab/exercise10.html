@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script src="../util.js"></script>
+	<script>
+		function printObject(p){
+			if(typeof p !== "object")
+				return;
+			writeColor(p.msg, p.tag, p.color);
+		}
+		
+		const p1 = {
+				tag : "h1",
+				color : "red",
+				msg : "가가가"
+		
+		};
+		const p2 = {
+				tag : "h2",
+				color : "orange",
+				msg : "나나나"
+		
+		};
+		const p3 = {
+				tag : "h3",
+				color : "yellow",
+				msg : "다다다"
+		
+		};
+		const p4 = {
+				tag : "h2",
+				color : "green",
+				msg : "라라라"
+		
+		};
+		const p5 = {
+				tag : "h1",
+				color : "blue",
+				msg : "마마마"
+		
+		};
+		printObject(p1);
+		printObject(p2);
+		printObject(p3);
+		printObject(p4);
+		printObject(p5);
+	</script>
+</body>
+</html>

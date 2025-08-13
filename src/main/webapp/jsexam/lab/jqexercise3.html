@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2><a href="https://ko.wikipedia.org/wiki/구구단" style="text-decoration:none;">구구단</a></h2>
+	<div id="gugu">
+		<button id='1'>1단</button>
+		<button id='2'>2단</button>
+		<button id='3'>3단</button>
+		<button id='4'>4단</button>
+		<button id='5'>5단</button>
+		<button id='6'>6단</button>
+		<button id='7'>7단</button>
+		<button id='8'>8단</button>
+		<button id='9'>9단</button><br>
+		
+	</div>
+	<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function(){
+			const menu = $('div').html();
+			$('div').on('click', function(e){
+				let content = '';
+				const dan = $(e.target).attr('id');
+				for(let i = 1; i < 10; i++)
+					content += `${dan} x ${i} = ${dan * i}<br>`;
+				$(this).html(menu + content);
+			});
+		});
+	</script>
+</body>
+</html>

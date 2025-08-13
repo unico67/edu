@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ECMAScript6</title>
+</head>
+<body>
+	<h1>구조분해 할당(객체 배열)</h1>
+	<hr>
+	<h3>배열이나 객체와 같은 자료 구조에서 값을 개별 변수에 쉽게 할당할 수 있도록 하는 기능</h3>
+	<script>
+		// Object Destructuring
+		const person = { firstName: '길동', lastName: '고', age: 30 };
+		const { firstName, age } = person;
+		console.log(firstName, age);
+	
+		// Renaming properties
+		const { firstName: fName, lastName: lName } = person;
+		console.log(fName, lName); 
+
+		const { city = 'Unknown', age1 } = person;
+		console.log(city); 
+		console.log(age1);
+	
+		const user = { id: 1, info: { email: 'j@d.com' } };
+		const { info: { email } } = user;
+		console.log(email); 
+	
+		const numbers = [10, 20, 30];
+		const [first, second] = numbers;
+		console.log(first, second); 
+	
+		// Skipping elements
+		const [, , third] = numbers;
+		console.log(third); 
+	
+		const [head, ...tail] = [1, 2, 3, 4];
+		console.log(head, tail);
+	
+		const { propA, ...rest } = { propA: 1, propB: 2, propC: 3 };
+		console.log(propA, rest); 
+	
+		function displayUser({ firstName, lastName }) {
+		  console.log(`이름: ${firstName} ${lastName}`);
+		}
+		displayUser(person); 
+	</script>
+</body>
+</html>

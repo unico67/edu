@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+* {
+	text-align: center;
+    font-family: "Gungsuh", "궁서", serif;
+}
+
+h1 {
+	font-size: 35px;
+	padding: 30px;
+	transition: color 0.5s ease;
+	text-shadow : 2px 2px 5px gray;
+	
+}
+</style>
+
+</head>
+<body>
+	<h1 id="colorChange">오늘의 날씨 정보</h1>
+	<hr>
+	<h2>
+		현재 온도: <span id="temp"></span>도
+	</h2>
+	<img id="imgWeather" alt="날씨 이미지" width="300" height="300">
+
+	<script>
+		const colors = [ "red", "green", "yellow", "blue", "purple" ];
+		const title = document.getElementById("colorChange");
+		function changeColor() {
+			const randomColor = colors[Math.floor(Math.random() * colors.length)];
+			title.style.color = randomColor;
+		}
+		setInterval(changeColor, 2000);
+
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", "content/weather.jsp", true);
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				const data = JSON.parse(xhr.responseText);
+				document.getElementById("temp").textContent = data.temp;
+				document.getElementById("imgWeather").src = "../../" + data.img;
+			} else {
+				console.error("오류", xhr.status);
+			}
+		};
+		xhr.send();
+	</script>
+</body>
+</html>

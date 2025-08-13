@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script src="../util.js"></script>
+<script>
+class DayInfo {
+	constructor(name, year, month, day) {
+		this.name=name;
+		this.year=year;
+		this.month=month;
+		this.day=day;
+	}
+	getTotalDates() {
+		const birth = new Date(this.year, this.month-1, this.day);
+		const today = new Date(); //현재 날짜
+		const diff = today-birth; //일수 계산
+		const days = Math.floor(diff/(1000*60*60*24)); 
+		return `${this.name}님은 태어난지 ${days}일 되었어요.`;
+	}
+	getKorDay() {
+		const date = new Date(this.year, this.month-1, this.day);
+		const days = ['일', '월', '화', '수', '목', '금', '토'];
+		return `${this.name}님은 ${days[date.getDay()]}요일에 태어났어요.`;
+	}
+}
+	
+const personArray = [
+	new DayInfo("둘리", 2025, 7, 2),
+	new DayInfo("또치", 2025, 6, 4),
+	new DayInfo("도우너", 1999, 1, 1),
+	new DayInfo("듀크", 1996, 1, 4),
+	new DayInfo("턱시", 1991, 8, 25)
+	];
+const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+
+for(let i=0;i<personArray.length;i++) {
+	writeColor(personArray[i].getTotalDates(), 'h3', colors[i]);
+	writeColor(personArray[i].getKorDay(), 'h3', colors[i]);
+}
+
+const result = personArray.filter((months) => months.month %2 == 0);
+const names = result.map(person => person.name);
+
+document.write(`<h2>짝수달에 태어난 친구들: ${names.join(',')}</h2>`);
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		@font-face {
+		    font-family: 'Ownglyph_corncorn-Rg';
+		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2412-1@1.0/Ownglyph_corncorn-Rg.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		body {
+			font-family: 'Ownglyph_corncorn-Rg';
+			margin: 0 auto;
+			text-align: center;
+		}
+		h1 {
+			padding-block: 20px; 
+			font-size: 30px;
+			color: white;
+			background-image: linear-gradient(to right, lightblue, steelblue, darkblue);
+		}
+		table {
+			width: 900px;
+			padding: 30px;
+			text-align: center;
+			margin: 20px auto;
+			border-collapse: collapse;
+		}
+		thead {
+			background-color: green;
+			color: white;
+			font-size: 20px;
+		}
+		.info-container {		
+		
+			&:nth-of-type(2n) {
+				background-color: lightgreen;
+			}
+		}
+		td {
+			padding: 10px;
+		}
+		button {
+			background-color: green;
+			color: white;
+			border-color: green;
+			border-radius: 10px;
+			transition: all 0.7s;
+			padding: 7px 15px;
+			margin-right: 10px;
+			
+			&:hover {
+				background-color: lightgreen;
+				color: black;
+			}
+		}
+		
+		.btn-container { 
+			padding: 10px 0;
+		}
+	</style>
+</head>
+<body>
+	<h1>구별 도서관 정보를 알려줘요~~</h1>  
+	<hr />
+	<div class="btn-container">
+		<button onclick="getLibrary('동대문구')">동대문구</button> 
+		<button onclick="getLibrary('동작구')">동작구</button>
+		<button onclick="getLibrary('강남구')">강남구</button>
+		<button onclick="getLibrary('마포구')">마포구</button>
+		<button onclick="getLibrary('영등포구')">영등포구</button>
+	</div>
+	<hr />
+	<table border="1">
+		<thead>
+		</thead>
+		<tbody> 
+		</tbody>
+	</table>	
+	<script>
+		const tablehead = document.querySelector("thead");
+		const tablebody = document.querySelector("tbody");
+
+		function getLibrary(location) {
+			tablehead.innerHTML = "";
+			tablebody.innerHTML = "";
+			const xhr = new XMLHttpRequest();
+			xhr.responseType = "json"; // 최신 웹브라우저에서 json으로 타입을 지정해주면 자동 파싱해준다.
+			xhr.onload = () => {
+				const response = xhr.response;
+				const data = response.SeoulPublicLibraryInfo.row;
+			
+				// 테이블 헤더 만들기
+				tablehead.innerHTML = 
+					`
+							<tr>
+								<th>도서관명</th>
+								<th>주소</th>
+							</tr>
+					`;
+			
+				// 구별 도서관 정보 추출 + 테이블 바디에 렌더링
+				for(let i = 0; i < data.length; i++) {
+					if(response.SeoulPublicLibraryInfo.row[i].CODE_VALUE === location) {
+						console.log(response.SeoulPublicLibraryInfo.row[i]);
+						tablebody.innerHTML += 
+							`
+								<tr class="info-container">
+									<td class="library-name">${response.SeoulPublicLibraryInfo.row[i].LBRRY_NAME}</td>
+							 		<td class="library-address">${response.SeoulPublicLibraryInfo.row[i].ADRES}</td>	
+								</tr>
+							`;
+					}
+				}
+			};
+			xhr.open("GET", "http://openapi.seoul.go.kr:8088/796143536a756e69313134667752417a/json/SeoulPublicLibraryInfo/1/1000/");
+			xhr.send();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1 {
+	text-align: center;
+	font-family: 'SDSamliphopangche_Outline';
+	margin-left: auto;
+	margin-right: auto;
+	text-shadow: -2px -2px 3px black;
+	color: white;
+}
+
+button {
+	font-family: 'SDSamliphopangche_Outline';
+	border: 1px solid black;
+	background-color: black;
+	color: white;
+}
+
+#select {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	width: 180px;
+	height: 70px;
+	line-height: 70px;
+	box-shadow: 10px 3px 2px black;
+	border-radius: 10px;
+}
+
+div {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<h1>이벤트 처리 실습</h1>
+	<hr>
+	<div id="select">
+		<button data-weather=sun>맑음</button>
+		<button data-weather=cloud>흐림</button>
+		<button data-weather=rain>비</button>
+	</div>
+	<hr>
+	<div>
+		<img src="">
+	</div>
+
+	<script>
+		function clickHandler() {
+			const divDom = document.querySelector('div');
+			divDom.addEventListener("click", weather);
+		}
+		function weather(e) {
+			if(e.target.nodeName == 'BUTTON'){
+				const input = document.querySelector("img");
+				/* window.alert(e.target.getAttribute("data-weather")); */
+				input.setAttribute("src", "/edu/images/"
+						+ e.target.getAttribute("data-weather") + ".png");
+			}
+		}
+		window.addEventListener("load", clickHandler);
+	</script>
+
+</body>
+</html>

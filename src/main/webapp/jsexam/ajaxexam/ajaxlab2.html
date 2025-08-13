@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>title</title>
+      <style>
+      	img{
+      		width: 200px;     
+      		height: auto;
+      	}
+      </style>
+      <script>
+      function getRandomColor() {
+          const r = Math.floor(Math.random() * 256); // 0~255
+          const g = Math.floor(Math.random() * 256);
+          const b = Math.floor(Math.random() * 256);
+          return `rgb(${r}, ${g}, ${b})`;
+        }
+      
+      window.addEventListener("load", function() {
+	     setInterval(function() {
+		    const xhr = new XMLHttpRequest();
+		    xhr.onload = function(event) {
+			   if (xhr.status == 200) {
+				  const str = xhr.responseText;
+				  const obj = JSON.parse(str);
+				  const target = document.getElementById('w_id');
+				  const temp_str = "기온: " +obj.temp+ "도";
+				  document.getElementById("temp").textContent = temp_str;
+				  const url = "../../" + obj.img;
+				  target.src = url;
+				  document.getElementById("myTitle").style.color = getRandomColor();
+			   }
+		    };
+		    xhr.open('GET', 'content/weather.jsp', true);
+		    xhr.send(); 
+	     },2000);
+      });	 
+      </script>
+   </head>
+   <body>
+      <h1 id="myTitle">오늘의 날씨 정보</h1><hr>
+      <h3 id ="temp"></h3>
+	  <img id = "w_id" src="" />
+</body>
+</html>

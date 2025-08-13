@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>배열 복습과 ES 에서 추가된 기능(2)</h1>
+<script>
+// splice(start, count[, newItem, newItem, newItem, ...])
+{
+  let months = ["January", "February", "Monday", "Tuesday"];
+  let days = months.splice(2); 
+  console.log(days); 
+} 
+
+{
+  let months = ["January", "February", "Monday", "Tuesday"];
+  let days = months.splice(2, 1); 
+  console.log(days); 
+} 
+
+{
+  let months = ["January", "February", "Monday", "Tuesday"];
+  let days = months.splice(2, 2, "March", "April"); 
+
+  console.log(days); 
+  console.log(months); 	
+}
+
+{
+  let months = ["January", "February", "Monday", "Tuesday"];
+  months.splice(2, 0, "March"); 
+
+  console.log(months); 
+}
+
+{
+  const fruits = ['apple', 'banana', 'orange'];
+  const result = fruits.join(',');
+  console.log(result);
+}
+
+console.log("=".repeat(20))
+{
+  const fruits = '🍎, 🥝, 🍌, 🍒';
+  const result = fruits.split(',');
+  console.log(result);
+}
+
+{
+  const array = [1, 2, 3, 4, 5];
+  const result = array.reverse();
+  console.log(result);
+  console.log(array);
+}
+
+{
+  const array = [1, 2, 3, 4, 5];
+  const result = array.slice(2, 5);
+  console.log(result);
+  console.log(array);
+}
+
+{
+  const array = [90, 60, 83, 74, 95];
+  const result = array.filter(e => e >= 80);
+  console.log(result);
+  console.log(array);
+}
+console.log("=".repeat(20))
+class Student {
+  constructor(name, age, enrolled, score) {
+    this.name = name;
+    this.age = age;
+    this.enrolled = enrolled;
+    this.score = score;
+  }
+}
+const students = [
+  new Student('A', 29, true, 45),
+  new Student('B', 28, false, 80),
+  new Student('C', 30, true, 90),
+  new Student('D', 40, false, 66),
+  new Student('E', 18, true, 88),
+];
+
+{
+  const result = students.find((student) => student.score === 90);
+  console.log(result);
+}
+
+{
+  const result = students.filter((student) => student.enrolled);
+  console.log(result);
+}
+
+{
+  const result = students.map((student) => student.score);
+  console.log(result);
+}
+
+{  
+  const result = students.some((student) => student.score < 50);
+  console.log(result);
+
+  const result2 = !students.every((student) => student.score >= 50);
+  console.log(result2);
+}
+
+console.log("=".repeat(20))
+{
+  const result = students
+    .map((student) => student.score)
+    .filter((score) => score >= 50)
+    .join();
+  console.log(result);
+}
+
+{
+  const result = students
+	    .map((student) => student.score)
+	    .sort((a, b) => b - a)
+	    .join();
+  console.log(result);
+}
+
+</script>
+</body>
+</html>

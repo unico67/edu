@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+* {
+    text-align: center;
+}
+
+div {
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+</head>
+<body>
+<h1>지도를 그리자</h1>
+<hr>
+<button onclick="changeMapLocation('myhome')">우리집</button>
+<button onclick="changeMapLocation('favorite')">내가 좋아하는 곳</button>
+<hr>
+<div id="map" style="width:800px;height:500px;"></div>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script>
+<script>
+var map; // 지도 객체를 전역 변수로 선언
+
+function changeMapLocation(location) {
+    var mapContainer = document.getElementById('map');
+    var changeLocation;
+    var iwContent;
+
+    // location에 따라 지도에 추가할 위치를 결정합니다
+    if (location === 'myhome') {
+        changeLocation = new kakao.maps.LatLng(37.60088972374274, 127.09314166495157);
+        iwContent = '<div style="padding:10px;background-color:magenta;font-weight:bold;">우리집</div>';
+    } else if (location === 'favorite') {
+        changeLocation = new kakao.maps.LatLng(33.450701, 126.570667);
+        iwContent = '<div style="padding:10px;background-color:magenta;font-weight:bold;">내가 좋아하는 곳</div>';
+    }
+
+    // 새로운 지도 옵션 설정
+    var newMapOption = {
+        center: changeLocation,
+        level: 1
+    };
+
+    // 지도를 새로 생성
+    map = new kakao.maps.Map(mapContainer, newMapOption);
+
+    // 마커 생성
+    var marker = new kakao.maps.Marker({
+        position: changeLocation,
+        clickable: true
+    });
+    marker.setMap(map);
+
+    // 인포윈도우 생성
+    var infowindow = new kakao.maps.InfoWindow({
+        content: iwContent,
+        removable: true
+    });
+
+    // 마커에 클릭 이벤트를 등록하여 인포윈도우를 엽니다
+    kakao.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+    });
+}
+</script>
+</body>
+</html>

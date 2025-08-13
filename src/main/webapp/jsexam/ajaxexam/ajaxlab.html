@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	@font-face {
+    font-family: 'Ownglyph_corncorn-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2412-1@1.0/Ownglyph_corncorn-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+	* {
+		font-family: 'Ownglyph_corncorn-Rg';	
+	}
+	
+	h1 {
+		text-shadow: 0 0 10px gray;
+	}
+	
+</style>
+</head>
+<body>
+<h1 id=color>오늘의 날씨 정보</h1>
+<hr>
+<div id='target'></div>
+
+<script>
+const h1 = document.getElementById('color');
+const colors = ['lightpink', 'lightgreen', 'lightblue', 'lightpurple', 'navy', 'blue', 'green'];
+let index = 0;
+
+setInterval(() => {
+	h1.style.color = colors[index];
+	index = (index+1) % colors.length;
+}, 2000);
+
+window.onload = function() {
+	const url = "content/weather.jsp";	
+	const xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+       document.getElementById('target').textContent = xhr.responseText;
+       console.log(JSON.parse(xhr.responseText))
+    const jsonObj = JSON.parse(xhr.responseText);
+    const dom = document.getElementById('target');
+    console.log(jsonObj)
+    dom.innerHTML = `<p>기온: ${jsonObj.temp} 도</p> <br> <img src=/edu/${jsonObj.img} width=300px height=300px>`;
+    };
+    
+    xhr.open("GET", url, true);
+    xhr.send();
+};
+</script>
+</body>
+</html>

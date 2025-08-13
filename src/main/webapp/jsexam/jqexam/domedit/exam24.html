@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		* {
+			margin : 5px;
+		}
+	</style>
+    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('img').css('width', 100);
+            setInterval(function () {
+                // 첫 번째 이미지를 마지막으로 보냅니다.
+                $('img').first().appendTo('body');
+            }, 2000);
+        });
+    </script>
+</head>
+<body>
+    <img src="Chrysanthemum.jpg" />
+    <img src="Desert.jpg" />
+    <img src="Hydrangeas.jpg" />
+    <img src="Jellyfish.jpg" />
+    <img src="Koala.jpg" />
+</body>
+</html>

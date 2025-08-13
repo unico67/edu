@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>이벤트 모델-jQuery</h1>
+	<hr>
+	<div>
+		<button id="red">빨강색</button>
+		<button id="blue">파랑색</button>
+		<button id="yellow">노랑색</button>
+	</div>
+	<hr>
+	<h3></h3>
+	<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function(){
+			const today = new Date();
+			$('h3').text(`오늘은 ${today.getMonth() + 1}월 ${today.getDate()}일입니다`); 
+			$('div').on('click', function(e){
+				$('h3').css('color', $(e.target).attr('id'));
+			});
+		});
+		
+	</script>
+</body>
+</html>

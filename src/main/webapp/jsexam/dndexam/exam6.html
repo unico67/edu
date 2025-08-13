@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Drag and Drop</title>
+  <link rel="stylesheet" href="dragdrop.css">
+  <style>
+  	@font-face {
+    	font-family: 'Ownglyph_StudyHard-Rg';
+    	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_StudyHard-Rg.woff2') format('woff2');
+    	font-weight: normal;
+    	font-style: normal;    	
+	}
+	* {
+		font-family: 'Ownglyph_StudyHard-Rg';
+	} 	
+	section {
+		width: 700px !important;
+		font-size : 1.3em;
+	}	
+  </style>
+  <script>
+  	var drop;
+  	function initiate(){
+	  drop=document.getElementById('dropbox');
+	  drop.addEventListener('dragover', function(e){ e.preventDefault(); }, false);
+	  drop.addEventListener('drop', dropped, false);
+	}
+	function dropped(e){
+	  e.preventDefault();
+	  let files=e.dataTransfer.files;
+	  let list='';
+	  for(let f=0;f<files.length;f++){
+	    list+=`File: ${files[f].name}-${files[f].size}(${files[f].type})<br>`;
+	  }
+	  drop.innerHTML=list;
+	}
+	window.addEventListener('load', initiate, false);
+  </script>
+</head>
+<body>
+  <h1>외부 파일의 드래그&amp;드롭</h1>
+  <section id="dropbox">
+    Drag and drop FILES here
+  </section>
+</body>
+</html>

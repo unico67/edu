@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>지도를 그리자 </h1>
+<hr>
+<button onclick="showMarker1()">우리집</button> 
+<button onclick="showMarker2()">내가 좋아하는 곳</button> 
+<hr>
+<div id="map" style="width:800px;height:500px;"></div> 
+<script  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1cc2187c8717ffab77eb12ceab5806ae"></script> 
+
+<script>    
+  const container = document.getElementById('map');
+  const options = {
+   center: new kakao.maps.LatLng(37.583743027324, 126.999963317958), //위도경도
+   level: 10 // 1(최대확대) ~ 14
+  };
+  var map = new kakao.maps.Map(container, options);   //맵 객체 생성
+  
+  var imageSrc = '/edu/images/duke.png', // 마커이미지의 주소입니다    
+  imageSize = new kakao.maps.Size(40, 50), // 마커이미지의 크기입니다
+  imageOption = {
+   offset : new kakao.maps.Point(20, 60)
+  }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+  //마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+  var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+
+  // 마커를 생성합니다
+  var marker = new kakao.maps.Marker({
+   position : new kakao.maps.LatLng(37.569717390363245, 126.90137029727566),
+   image : markerImage,
+   clickable : true      //클릭이 가능한 마커다
+  });
+
+  var marker2 = new kakao.maps.Marker({
+   position : new kakao.maps.LatLng(37.583743027324, 126.999963317958),
+   image : markerImage,
+   clickable : true      //클릭이 가능한 마커다
+  });
+
+  // 마커를 지도에 표시합니다.
+  marker.setMap(map);
+  marker2.setMap(map);
+
+  // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+  var infowindow1 = new kakao.maps.InfoWindow({
+   content : '<div style="padding:10px;background-color:magenta;font-weight:bold;">우리집</div>',
+   removable : true
+  });
+
+  var infowindow2 = new kakao.maps.InfoWindow({
+   content : '<div style="padding:10px;background-color:magenta;font-weight:bold;">내가 가장 좋아 하는 곳</div>',
+   removable : true
+  });
+
+  // 마커에 클릭이벤트를 등록합니다
+  kakao.maps.event.addListener(marker, 'click', function() {
+   infowindow1.open(map, marker); // 마커 위에 인포윈도우를 표시합니다
+  });
+
+  kakao.maps.event.addListener(marker2, 'click', function() {
+   infowindow2.open(map, marker2); // 마커 위에 인포윈도우를 표시합니다
+  });
+
+  // 우리집 버튼 클릭 시 marker1 보이기
+  function showMarker1() {
+   marker.setMap(map);
+   marker2.setMap(null); // marker2는 숨깁니다
+  }
+
+  // 내가 좋아하는 곳 버튼 클릭 시 marker2 보이기
+  function showMarker2() {
+   marker.setMap(null); // marker1은 숨깁니다
+   marker2.setMap(map);
+  }
+
+ </script>
+
+
+</body>
+</html>

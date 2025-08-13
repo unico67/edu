@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>이벤트 모델-고전</h1>
+	<hr>
+	<button id="b1"  data-mycolor="red">빨강색</button>
+	<button id="b2"  data-mycolor="blue">파랑색</button>
+	<button id="b3" data-mycolor="yellow">노랑색</button><br>
+	<hr>
+	<h3></h3>
+	<script>
+	    const h3 = document.getElementsByTagName("h3")[0];
+	    const text = `오늘은 XX월 XX일입니다`
+	    h3.textContent = text;
+	
+	    function click_processing(e) {
+			//let dom = document.getElementsByTagName("h3")[0];
+			h3.style.color = e.target.getAttribute("data-mycolor");
+		}
+		
+		var btn1 = document.querySelector("#b1");
+		btn1.onclick = click_processing;  
+		var btn1 = document.querySelector("#b2");
+		btn1.onclick = click_processing;  
+		var btn1 = document.querySelector("#b3");
+		btn1.onclick = click_processing; 
+	</script>
+</body>
+</html>
